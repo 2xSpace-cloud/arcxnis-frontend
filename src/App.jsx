@@ -122,19 +122,32 @@ export default function App() {
   }, []);
 
   // Show welcome guide for new players (level 1, never seen it)
-  useEffect(() => {
-    if (!user) return;
-    const key = `welcome_seen_${user.id}`;
-    if (localStorage.getItem(key)) return;
-    fetch(`${API}/api/player`, { credentials: 'include' })
-      .then(r => r.json())
-      .then(data => {
-        const p = data.player;
-        if (p && p.level <= 1 && !p.faction && Object.keys(p.inventory || {}).length === 0) {
-          setShowWelcome(true);
-        }
-      })
-      .catch(() => {});
+useEffect(() => {
+  async function init() {
+    // 1️⃣ Login → obtenir le JWT
+    const resLogin = await fetch(`${API}/auth/login`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ key: "TA_CLE_API" }),
+    });
+
+    const { token } = await resLogin.json();
+    localStorage.setItem("token", token);
+
+    // 2️⃣ Charger le joueur
+    const resPlayer = await fetch(`${API}/api/players`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+
+    const players = await resPlayer.json();
+
+    // Exemple : prendre le premier joueur
+    setUser(players[0] || null);
+  }
+
+  init();
+}, []);
+
   }, [user]);
 
   const closeWelcome = () => {
