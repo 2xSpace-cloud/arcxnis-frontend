@@ -11,6 +11,19 @@ import ShopPage from "./pages/ShopPage.jsx";
 
 const API = "https://631fead1-52c2-4865-b097-b2ebae910fac-00-bwnldj7qyjr0.riker.replit.dev";
 
+export function apiFetch(path, options = {}) {
+  const token = localStorage.getItem("token");
+
+  return fetch(`${API}${path}`, {
+    ...options,
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+      ...(options.headers || {})
+    }
+  }).then(r => r.json());
+}
+
 export const UserContext = createContext(null);
 
 export default function App() {
