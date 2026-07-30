@@ -11,7 +11,8 @@ import CombatPage from './pages/CombatPage.jsx';
 import ShopPage from './pages/ShopPage.jsx';
 import WelcomeGuide from './components/WelcomeGuide.jsx';
 
-const API = 'https://631fead1-52c2-4865-b097-b2ebae910fac-00-bwnldj7qyjr0.riker.replit.dev';
+const API = 'https://631fead1-52c2-4865-b097-b2ebae910fac-00-bwnldj7qyjr0.riker.replit.dev
+';
 
 
 export const UserContext = createContext(null);
