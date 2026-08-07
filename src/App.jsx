@@ -9,7 +9,7 @@ import OverviewPage from "./pages/OverviewPage.jsx";
 import CombatPage from "./pages/CombatPage.jsx";
 import ShopPage from "./pages/ShopPage.jsx";
 
-const API = "https://631fead1-52c2-4865-b097-b2ebae910fac-00-bwnldj7qyjr0.riker.replit.dev";
+const API = "https://3f078002-9b33-4178-83a2-fae9323238c7-00-8j76jo1ho9z7.spock.replit.dev";
 
 export function apiFetch(path, options = {}) {
   const token = localStorage.getItem("token");
